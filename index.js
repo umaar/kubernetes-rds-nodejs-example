@@ -39,14 +39,17 @@ function registerAppRoutes({app}) {
 	let requestCount = 0;
 
 	app.get('/', async (req, res) => {
+		requestCount++;
+
 		const userAgent = req.headers['user-agent'];
+
 		await db('views').insert({
 			user_agent: userAgent
 		});
 
 		const [{count}] = await db('views').count('id');
-		const message = `Session ${requestCount} out of ${count} of all time\n`;
-		requestCount++;
+		const message = `${requestCount} page views since last app restart. ${count} views of all time\n`;
+
 		console.log(message);
 		res.send(message);
 	});
