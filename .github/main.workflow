@@ -32,9 +32,9 @@ action "Tag docker image" {
   needs = ["Build Docker Image"]
   env = {
     CONTAINER_REGISTRY_PATH = "754256621582.dkr.ecr.eu-west-2.amazonaws.com"
-    IMAGE_NAME = "form-builder/umar-dev:latest"
+    IMAGE_NAME = "form-builder/umar-dev"
   }
-  args = ["$IMAGE_NAME", "$CONTAINER_REGISTRY_PATH/$IMAGE_NAME"]
+  args = ["$IMAGE_NAME:latest", "$CONTAINER_REGISTRY_PATH/$IMAGE_NAME"]
 }
 
 action "Push docker image to ECR" {
