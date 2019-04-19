@@ -12,6 +12,7 @@
   "scripts": {
     "migrate-db": "knex migrate:latest",
     "migrate-and-start": "npm run migrate-db && npm run start",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo write some tests! && echo $(whoami) && echo $(hostname)"
   }
 }
