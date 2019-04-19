@@ -3,6 +3,7 @@ workflow "Build and deploy on push" {
   resolves = [
     "Log into AWS ECR",
     "Restart pod",
+    "Run tests",
   ]
 }
 
@@ -25,6 +26,7 @@ action "Tag docker image" {
   needs = [
     "Build Docker Image",
     "Log into AWS ECR",
+    "Run tests",
   ]
   env = {
     CONTAINER_REGISTRY_PATH = "754256621582.dkr.ecr.eu-west-2.amazonaws.com"
@@ -48,4 +50,9 @@ action "Restart pod" {
   needs = ["Push docker image to ECR"]
   args = "delete pods -n umar-dev $(kubectl get pods --selector=app=hello-umar-dev-app-name -n umar-dev | grep hello-umar-dev-app-name | sed 's/ .*//')"
   secrets = ["KUBE_CONFIG_DATA"]
+}
+
+action "Run tests" {
+  uses = "actions/docker/cli@master"
+  args = "run --rm form-builder/umar-dev npm test"
 }
