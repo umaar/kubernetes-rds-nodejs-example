@@ -45,7 +45,7 @@ function registerAppRoutes({app}) {
 		});
 
 		const [{count}] = await db('views').count('id');
-		const message = `Session ${requestCount} out of ${count} of all time!\n`;
+		const message = `Session ${requestCount} out of ${count} of all time!!!\n`;
 		requestCount++;
 		console.log(message);
 		res.send(message);
