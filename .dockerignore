@@ -1,0 +1,10 @@
+.git
+*Dockerfile*
+*docker-compose*
+node_modules
+**/node_modules
+*.md
+.env
+**/.DS_Store
+kubectl_deploy
+.gitignore
