@@ -3,7 +3,6 @@ workflow "Build and deploy on push" {
   resolves = [
     "Log into AWS ECR",
     "Restart pod",
-    "Run tests",
   ]
 }
 
@@ -25,7 +24,6 @@ action "Tag docker image" {
   uses = "actions/docker/tag@master"
   needs = [
     "Build Docker Image",
-    "Log into AWS ECR",
     "Run tests",
   ]
   env = {
@@ -37,7 +35,10 @@ action "Tag docker image" {
 
 action "Push docker image to ECR" {
   uses = "actions/docker/cli@master"
-  needs = ["Tag docker image"]
+  needs = [
+    "Tag docker image",
+    "Log into AWS ECR"
+  ]
   env = {
     CONTAINER_REGISTRY_PATH = "754256621582.dkr.ecr.eu-west-2.amazonaws.com"
     IMAGE_NAME = "form-builder/umar-dev:latest"
@@ -54,5 +55,6 @@ action "Restart pod" {
 
 action "Run tests" {
   uses = "actions/docker/cli@master"
+  needs = ["Build Docker Image"]
   args = "run --rm form-builder/umar-dev npm test"
 }
