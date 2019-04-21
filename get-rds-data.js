@@ -1,4 +1,4 @@
-const shellExec = require('shell-exec')
+const shellExec = require('shell-exec');
 
 function decodeBase64(encodedValue) {
 	const buf = Buffer.from(encodedValue, 'base64');
@@ -14,15 +14,17 @@ async function start() {
 
 	const secrets = {};
 
-	[
+	const usefulSecretKeys = [
 		'database_username',
 		'database_password',
 		'rds_instance_endpoint',
 		'database_name',
 		'rds_instance_address'
-	].map(property => {
-		secrets[property] = decodeBase64(myEncodedSecrets[property])
-	})
+	];
+
+	for (const secretKey of usefulSecretKeys) {
+		secrets[secretKey] = decodeBase64(myEncodedSecrets[secretKey]);
+	}
 
 	console.log({secrets});
 
@@ -31,4 +33,4 @@ async function start() {
 	console.log('\n', connectionString);
 }
 
-start()
+start();

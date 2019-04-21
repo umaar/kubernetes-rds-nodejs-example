@@ -9,6 +9,8 @@ RUN npm install
 
 RUN addgroup -S group1 && adduser -S user1 -u 1001 -G group1
 
+RUN chown -R user1:group1 /runner
+
 USER 1001
 
 EXPOSE  3000
