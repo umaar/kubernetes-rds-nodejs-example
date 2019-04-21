@@ -13,6 +13,9 @@
     "migrate-db": "knex migrate:latest",
     "migrate-and-start": "npm run migrate-db && npm run start",
     "start": "node index.js",
-    "test": "echo do linting here! && echo $(whoami) && echo $(hostname)"
+    "test": "xo && echo do linting here! && echo $(whoami) && echo $(hostname)"
+  },
+  "devDependencies": {
+    "xo": "^0.24.0"
   }
 }
