@@ -17,7 +17,7 @@ module.exports = {
 		connection: {
 			host: RDS_INSTANCE_ADDRESS,
 			database: DATABASE_NAME,
-			user:     DATABASE_USERNAME,
+			user: DATABASE_USERNAME,
 			password: DATABASE_PASSWORD
 		},
 		pool: {
