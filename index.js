@@ -1,19 +1,20 @@
-require('dotenv').config()
+require('dotenv').config();
 
-var express = require('express');
 const os = require('os');
+const express = require('express');
+const knex = require('knex');
 
-const defaultKnexfileConfig = require('./knexfile.js')['development'];
+const defaultKnexfileConfig = require('./knexfile.js').development;
 
 const knexConfig = {
 	...defaultKnexfileConfig,
-	// debug: true,
+	// Debug: true,
 	acquireConnectionTimeout: 2000
-}
+};
 
-const db = require('knex')(knexConfig);
+const db = knex(knexConfig);
 
-var DEFAULT_PORT = process.env.PORT || 3000;
+const DEFAULT_PORT = process.env.PORT || 3000;
 
 function logUsefulInfo() {
 	const hostname = os.hostname();
@@ -44,6 +45,7 @@ function registerAppRoutes({app}) {
 		const userAgent = req.headers['user-agent'];
 
 		await db('views').insert({
+			/* eslint camelcase: "off" */
 			user_agent: userAgent
 		});
 
@@ -65,7 +67,7 @@ async function start() {
 	});
 }
 
-start().catch(err => {
-	console.log('There was an error\n\n', err, '\n\nExiting...\n\n');
-	process.exit(1);
+start().catch(error => {
+	console.log('There was an error\n\n', error, '\n\nExiting...\n\n');
+	throw new Error(error);
 });

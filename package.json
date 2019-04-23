@@ -1,5 +1,15 @@
 {
   "name": "umar-dev-cloud-platform-demo-node",
+  "xo": {
+    "overrides": [
+      {
+        "files": "migrations/*.js",
+        "rules": {
+          "unicorn/filename-case": false
+        }
+      }
+    ]
+  },
   "private": true,
   "version": "0.0.1",
   "description": "Umar's Node.js samples for cloud platform",
@@ -7,13 +17,14 @@
     "dotenv": "^7.0.0",
     "express": "4.16.1",
     "knex": "^0.16.5",
-    "pg": "^7.10.0"
+    "pg": "^7.10.0",
+    "shell-exec": "^1.0.2"
   },
   "scripts": {
     "migrate-db": "knex migrate:latest",
     "migrate-and-start": "npm run migrate-db && npm run start",
     "start": "node index.js",
-    "test": "xo && echo do linting here! && echo $(whoami) && echo $(hostname)"
+    "test": "xo"
   },
   "devDependencies": {
     "xo": "^0.24.0"
