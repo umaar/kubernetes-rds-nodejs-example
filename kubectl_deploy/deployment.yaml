@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello-umar-dev-app-name
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-umar-dev-app-name
+    spec:
+      containers:
+      - name: hello-umar-dev-container-name
+        env:
+          - name: DATABASE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: umar-dev-rds-app-name
+                key: database_name
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: umar-dev-rds-app-name
+                key: database_password
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: umar-dev-rds-app-name
+                key: database_username
+          - name: RDS_INSTANCE_ADDRESS
+            valueFrom:
+              secretKeyRef:
+                name: umar-dev-rds-app-name
+                key: rds_instance_address
+          - name: RDS_INSTANCE_ENDPOINT
+            valueFrom:
+              secretKeyRef:
+                name: umar-dev-rds-app-name
+                key: rds_instance_endpoint
+        image: 754256621582.dkr.ecr.eu-west-2.amazonaws.com/form-builder/umar-dev:latest
+        ports:
+        - containerPort: 3000

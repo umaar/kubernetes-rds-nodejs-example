@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-umar-dev-app-ingress
+spec:
+  tls:
+  - hosts:
+    - hello-umar-dev-node-app.apps.live-1.cloud-platform.service.justice.gov.uk
+  rules:
+  - host: hello-umar-dev-node-app.apps.live-1.cloud-platform.service.justice.gov.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hello-umar-dev-app-service
+          servicePort: 3000
