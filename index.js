@@ -50,7 +50,7 @@ function registerAppRoutes({app}) {
 		});
 
 		const [{count}] = await db('views').count('id');
-		const message = `${requestCount} page views since last app restart. ${count} views of all time ✅️\n`;
+		const message = `${requestCount} page views since last app restart. ${count} views of all time ✨️\n`;
 
 		console.log(message);
 		res.send(message);
