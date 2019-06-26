@@ -1,4 +1,4 @@
-FROM node:10.15.3-alpine
+FROM node:12.4.0-alpine
 
 RUN mkdir /runner
 
